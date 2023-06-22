@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Movies.css';
 import img1 from '../images/React.png';
-import img2 from '../images/React3.png';
 import { Link } from 'react-router-dom';
 
 function Movies() {

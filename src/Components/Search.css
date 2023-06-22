@@ -1,0 +1,12 @@
+.form-control{
+    width: 50%;
+    height: 54px;
+    border-radius: 22px;
+}
+
+.Searchbtn{
+    border-radius: 10px;
+    margin-left: 10px;
+    width: 13%;
+    height: 36px;
+}

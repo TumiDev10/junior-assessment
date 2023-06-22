@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './Movies.css';
+import './Search.css';
 import img1 from '../images/React.png';
-import img2 from '../images/React3.png';
 import { Link } from 'react-router-dom';
 
 function Movies() {
@@ -89,7 +88,7 @@ function Movies() {
           placeholder="Search movies..."
           className='form-control'
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className='Searchbtn' onClick={handleSearch}>Search</button>
       </div>
       {loading ? <p>Loading movies...</p> : <div className="row">{renderMovies()}</div>}
     </div>
