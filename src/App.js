@@ -10,7 +10,7 @@ import Search from './Components/Search';
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{backgroundColor: 'aliceblue'}}>
         <Navbar />
         <Routes>
           <Route path="/movies" element={<Movies />} />
