@@ -1,76 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import img1 from '../images/React3.png';
+import './Movies.css';
 import { Link } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 
 function TopMovies() {
-    const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(true);
-  
-    // Simulating API call
-    useEffect(() => {
-      // Simulating delay to show loading state
-      const delay = setTimeout(() => {
-        const fetchedMovies = [
-          { title: 'Top Movie 1', description: 'Description 1', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-          { title: 'Top Movie 2', description: 'Description 2', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-          { title: 'Top Movie 3', description: 'Description 3', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-          { title: 'Top Movie 4', description: 'Description 4', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-          { title: 'Top Movie 5', description: 'Description 5', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-          { title: 'Top Movie 6', description: 'Description 6', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-        ];
-        setMovies(fetchedMovies);
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch('https://imdb-api.com/en/API/MostPopularMovies/k_vsqa7akw');
+        const data = await response.json();
+        setMovies(data.items);
         setLoading(false);
-      }, 2000);
-  
-      return () => clearTimeout(delay); // Cleanup timer on unmount
-    }, []);
-  
-    return (
-      <div>
-        <h1 style={{ marginLeft: '1%' }}>Movies</h1>
-        {loading ? (
-          <p>Loading movies...</p>
-        ) : (
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="row">
-                {movies.slice(0, 6).map((movie, index) => (
-                  <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
-                    <div className="movie-card">
-                      <Link to={movie.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                      <img src={img1} className="movie-image" alt="Movie" />
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  return (
+    <div>
+      <h1 style={{ marginLeft: '1%' }}>MostPopular</h1>
+      {loading ? (
+        <p>Loading MostPopular Movies...</p>
+      ) : (
+        <Container fluid>
+          <Row>
+            {movies.map((movie, index) => (
+              <Col lg={2} md={4} sm={6} xs={6} key={index}>
+                <Card className="movie-card">
+                    <Card.Img src={movie.image} className="movie-image" alt="Movie" />
+                  <Card.Body className="movie-details">
+                    <Card.Title>{movie.title}</Card.Title>
+                    <Card.Text>{movie.description}</Card.Text>
+                    <Button variant="outline-info">
+                      <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
+                        Trailer
                       </Link>
-                      <div className="movie-details">
-                        <h3>{movie.title}</h3>
-                        <p>{movie.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="row">
-                {movies.slice(6, 12).map((movie, index) => (
-                  <div className="col-lg-12" key={index}>
-                    <div className="movie-card">
-                      <Link to={movie.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                      <img src={img1} className="movie-image" alt="Movie" />
-                      </Link>
-                      <div className="movie-details">
-                        <h3>{movie.title}</h3>
-                        <p>{movie.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      )}
+    </div>
+  );
+}
 
 export default TopMovies;
