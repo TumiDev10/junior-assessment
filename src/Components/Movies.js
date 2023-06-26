@@ -15,7 +15,7 @@ function Movies() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch('https://imdb-api.com/en/API/Top250Movies/k_vsqa7akw');
+        const response = await fetch('https://imdb-api.com/en/API/Top250Movies/k_kcx6k37t');
         const data = await response.json();
         setMovies(data.items);
         setLoading(false);
@@ -46,6 +46,11 @@ function Movies() {
                     <Button variant="outline-info">
                       <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
                         Trailer
+                      </Link>
+                    </Button>
+                    <Button variant="outline-info" style={{marginLeft: '80px'}}>
+                      <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
+                        Like
                       </Link>
                     </Button>
                   </Card.Body>

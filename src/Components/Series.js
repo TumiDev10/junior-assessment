@@ -15,7 +15,7 @@ function Series() {
   useEffect(() => {
     const fetchSeries = async () => {
       try {
-        const response = await fetch('https://imdb-api.com/en/API/Top250TVs/k_vsqa7akw');
+        const response = await fetch('https://imdb-api.com/en/API/Top250TVs/k_kcx6k37t');
         const data = await response.json();
         setSeries(data.items);
         setLoading(false);

@@ -15,7 +15,7 @@ function TopSeries() {
   useEffect(() => {
     const fetchSeries = async () => {
       try {
-        const response = await fetch('https://imdb-api.com/en/API/MostPopularTVs/k_vsqa7akw');
+        const response = await fetch('https://imdb-api.com/en/API/MostPopularTVs/k_kcx6k37t');
         const data = await response.json();
         setSeries(data.items);
         setLoading(false);

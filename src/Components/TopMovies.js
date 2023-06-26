@@ -15,7 +15,7 @@ function TopMovies() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch('https://imdb-api.com/en/API/MostPopularMovies/k_vsqa7akw');
+        const response = await fetch('https://imdb-api.com/en/API/MostPopularMovies/k_kcx6k37t');
         const data = await response.json();
         setMovies(data.items);
         setLoading(false);
