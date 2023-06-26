@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Search.css';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function Search() {
   const [movies, setMovies] = useState([]);
@@ -54,12 +55,16 @@ function Search() {
     return moviesToRender.map((movie, index) => (
       <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
         <div className="movie-card">
-          <Link to={movie.youtubeUrl} target="_blank" rel="noopener noreferrer">
             <img src={movie.image} className="movie-image" alt="Movie" />
-          </Link>
+          
           <div className="movie-details">
             <h3>{movie.title}</h3>
             <p>{movie.description}</p>
+            <Button variant="outline-info">
+                <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
+                  Trailer
+                </Link>
+              </Button>
           </div>
         </div>
       </div>
