@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import './Movies.css';
-import img1 from '../images/React.png';
 import { Link } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Simulating API call
   useEffect(() => {
-    // Simulating delay to show loading state
-    const delay = setTimeout(() => {
-      const fetchedMovies = [
-        { title: 'Movie 1', description: 'Description 1', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-        { title: 'Movie 2', description: 'Description 2', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-        { title: 'Movie 3', description: 'Description 3', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-        { title: 'Movie 4', description: 'Description 4', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-        { title: 'Movie 5', description: 'Description 5', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-        { title: 'Movie 6', description: 'Description 6', youtubeUrl: 'https://www.youtube.com/watch?v=hU7eMdGLe-s'  },
-      ];
-      setMovies(fetchedMovies);
-      setLoading(false);
-    }, 2000);
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch('https://imdb-api.com/en/API/Top250Movies/k_vsqa7akw');
+        const data = await response.json();
+        setMovies(data.items);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+        setLoading(false);
+      }
+    };
 
-    return () => clearTimeout(delay); // Cleanup timer on unmount
+    fetchMovies();
   }, []);
 
   return (
@@ -32,42 +32,23 @@ function Movies() {
       {loading ? (
         <p>Loading movies...</p>
       ) : (
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="row">
-              {movies.slice(0, 6).map((movie, index) => (
-                <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
-                  <div className="movie-card">
-                    <Link to={movie.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                    <img src={img1} className="movie-image" alt="Movie" />
-                    </Link>
-                    <div className="movie-details">
-                      <h3>{movie.title}</h3>
-                      <p>{movie.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="row">
-              {movies.slice(6, 12).map((movie, index) => (
-                <div className="col-lg-12" key={index}>
-                  <div className="movie-card">
-                    <Link to={movie.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                    <img src={img1} className="movie-image" alt="Movie" />
-                    </Link>
-                    <div className="movie-details">
-                      <h3>{movie.title}</h3>
-                      <p>{movie.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <Container fluid>
+          <Row>
+            {movies.slice(0, 6).map((movie, index) => (
+              <Col lg={2} md={4} sm={6} xs={6} key={index}>
+                <Card className="movie-card">
+                  <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer">
+                    <Card.Img src={movie.image} className="movie-image" alt="Movie" />
+                  </Link>
+                  <Card.Body className="movie-details">
+                    <Card.Title>{movie.title}</Card.Title>
+                    <Card.Text>{movie.description}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
       )}
     </div>
   );
