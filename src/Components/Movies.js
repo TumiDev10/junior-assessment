@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -34,15 +36,18 @@ function Movies() {
       ) : (
         <Container fluid>
           <Row>
-            {movies.slice(0, 6).map((movie, index) => (
+            {movies.map((movie, index) => (
               <Col lg={2} md={4} sm={6} xs={6} key={index}>
                 <Card className="movie-card">
-                  <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer">
                     <Card.Img src={movie.image} className="movie-image" alt="Movie" />
-                  </Link>
                   <Card.Body className="movie-details">
                     <Card.Title>{movie.title}</Card.Title>
                     <Card.Text>{movie.description}</Card.Text>
+                    <Button variant="outline-info">
+                      <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
+                        Trailer
+                      </Link>
+                    </Button>
                   </Card.Body>
                 </Card>
               </Col>
