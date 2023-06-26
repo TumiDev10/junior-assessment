@@ -14,7 +14,7 @@ function App() {
       <div style={{backgroundColor: 'aliceblue'}}>
         <Navbar />
         <Routes>
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/" element={<Movies />} />
           <Route path="/series" element={<Series />} />
           <Route path="/topmovies" element={<TopMovies />} />
           <Route path="/topseries" element={<TopSeries />} />

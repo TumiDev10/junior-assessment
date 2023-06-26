@@ -76,6 +76,7 @@ function Search() {
               </Link>
             </Button>
             <Button
+              style={{marginTop: '2pxs'}}
               variant="outline-primary"
               onClick={() => handleAddToFavorites(movie)}
               className={isFavorite(movie) ? 'favorite-button favorite' : 'favorite-button'}
