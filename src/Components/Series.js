@@ -20,7 +20,7 @@ function Series() {
         setSeries(data.items);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error('Error fetching series:', error);
         setLoading(false);
       }
     };
@@ -30,9 +30,9 @@ function Series() {
 
   return (
     <div>
-      <h1 style={{ marginLeft: '1%' }}>Movies</h1>
+      <h1 style={{ marginLeft: '1%' }}>Series</h1>
       {loading ? (
-        <p>Loading movies...</p>
+        <p>Loading series...</p>
       ) : (
         <Container fluid>
           <Row>
