@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './Search.css';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { FaHeart } from 'react-icons/fa';
 
 function Search() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   // Fetch movies from API
   useEffect(() => {
@@ -41,9 +43,12 @@ function Search() {
       setSearchResults(results);
     }
   };
-  
-  
-  
+
+  const handleAddToFavorites = (movie) => {
+    setFavorites([...favorites, movie]);
+  };
+
+  const isFavorite = (movie) => favorites.some((fav) => fav.title === movie.title);
 
   const renderMovies = () => {
     if (searchQuery && searchResults.length === 0) {
@@ -55,16 +60,28 @@ function Search() {
     return moviesToRender.map((movie, index) => (
       <div className="col-lg-2 col-md-4 col-sm-6 col-6" key={index}>
         <div className="movie-card">
-            <img src={movie.image} className="movie-image" alt="Movie" />
-          
+          <img src={movie.image} className="movie-image" alt="Movie" />
+
           <div className="movie-details">
             <h3>{movie.title}</h3>
             <p>{movie.description}</p>
             <Button variant="outline-info">
-                <Link to={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
-                  Trailer
-                </Link>
-              </Button>
+              <Link
+                to={`https://www.imdb.com/title/${movie.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                Trailer
+              </Link>
+            </Button>
+            <Button
+              variant="outline-primary"
+              onClick={() => handleAddToFavorites(movie)}
+              className={isFavorite(movie) ? 'favorite-button favorite' : 'favorite-button'}
+            >
+              <FaHeart />
+            </Button>
           </div>
         </div>
       </div>

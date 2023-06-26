@@ -6,6 +6,7 @@ import Series from './Components/Series';
 import TopMovies from './Components/TopMovies';
 import TopSeries from './Components/TopSeries';
 import Search from './Components/Search';
+import Favorites from './Components/Favorites';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/topmovies" element={<TopMovies />} />
           <Route path="/topseries" element={<TopSeries />} />
           <Route path="/search" element={<Search />} />
+          <Route path='/favorites' element={<Favorites />} />
         </Routes>
       </div>
     </Router>

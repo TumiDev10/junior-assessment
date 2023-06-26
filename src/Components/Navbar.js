@@ -11,6 +11,7 @@ function Navbar() {
       <Link to="/TopMovies">TopMovies</Link>
       <Link to="/TopSeries">TopSeries</Link>
       <Link to="/Search">Search</Link>
+      <Link to="/Favorites">Favourites</Link>
     </div>
   );
 }

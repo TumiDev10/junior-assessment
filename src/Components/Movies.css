@@ -37,9 +37,10 @@ body {
 
 .btn {
   /* border: none; */
+  border-radius: 10%;
+  background-color: lightskyblue;
   outline: none;
   padding: 10px 16px;
-  background-color: #f1f1f1;
   cursor: pointer;
   font-size: 18px;
   text-decoration: none;
